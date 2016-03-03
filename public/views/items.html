@@ -1,0 +1,169 @@
+<div>
+	<div id="categories" class="row-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>Items</h1>
+			</div>
+			<div class="col-xs-12">
+				<a href ng-click="addItem()" class="btn btn-success">Agregar Nueva</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alerts"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<p>Click para editar</p>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-group">
+                            <fieldset>
+                                <input type="text" class="form-control" placeholder="Filtrar" ng-model="searchTerm" />
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+				<ul id="sortable" class="sortable">
+					<li class="ui-state-default"
+						ng-class="{disabled:!item.get('enabled'),selected:item==currentItem}"
+						data-index="{{$index}}"
+						data-parse-id="{{item.id}}"
+						data-order="{{item.attributes.order}}"
+						ng-click="editItem($index);"
+						ng-repeat="item in items|searchValue:searchTerm">
+							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>{{item.attributes.name}}
+							<span class="ui-icon ui-icon-carat-1-e"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-8" ng-show="currentItem.attributes.name!==undefined" id="editForm">
+				<p>Edite la información</p>
+				<div class="row-fluid">
+					<form novalidate name="category">
+						<div class="row">
+							<div class="col-xs-7">
+								<div class="form-group">
+									<fieldset ng-disabled="isSaving">
+										<label for="editName">Nombre</label>
+										<input type="text" class="form-control" placeholder="Nombre" ng-model="currentItem.attributes.name" required>
+									</fieldset>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="checkbox">
+									<fieldset ng-disabled="isSaving">
+										<label><br/>
+											<input type="checkbox" ng-model="currentItem.attributes.enabled"> Habilitado
+										</label>
+									</fieldset>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="checkbox">
+									<fieldset ng-disabled="isSaving">
+										<label><br/>
+											<input type="checkbox" ng-model="currentItem.attributes.highlight"> Destacado
+										</label>
+									</fieldset>
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="checkbox">
+									<fieldset ng-disabled="isSaving">
+										<label><br/>
+											<input type="checkbox" ng-model="currentItem.attributes.isDiageo"> Diageo
+										</label>
+									</fieldset>
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-xs-10">
+								<p>
+									<fieldset ng-disabled="isSaving">
+                                        <label for="editImage">Subcategorías</label>
+										<div ng-dropdown-multiselect="" options="notSpecialSubcategories" selected-model="parentSubcategories" extra-settings="{displayProp: 'name', enableSearch: true};"></div>
+									</fieldset>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-xs-2">
+									<fieldset ng-disabled="isSaving">
+										<label for="editImage">Imagen</label>
+										<input type="file" id="editImage" ng-model="image" onchange="angular.element(this).scope().fileNameChanged()">
+									</fieldset>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group">
+								<div class="col-xs-10">
+									<br />
+									<img id="imageEdit" ng-show="currentItem.attributes.image._url" ng-src="{{currentItem.attributes.image._url}}" class="img-responsive block-center"/>
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-xs-10">
+								<p>
+									<fieldset ng-disabled="isSaving">
+                                        <label for="editImage">Precio (Numérico)</label>
+										<input type="number" class="form-control" placeholder="Precio" required ng-model="currentItem.attributes.numeric_price">
+									</fieldset>
+								</p>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="col-xs-10">
+								<p>
+									<fieldset ng-disabled="isSaving">
+                                        <label for="editImage">Precio (Extendido)</label>
+										<textarea ui-tinymce="tinyMCEOptions" ng-model="currentItem.attributes.price"></textarea>
+									</fieldset>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-10">
+								<p>
+									<fieldset ng-disabled="isSaving">
+                                        <label for="editImage">Descripción</label>
+										<div class="row-fluid">
+											<button ng-click="addDetail($index);" ng-repeat="detail in details">
+												<img ng-src="{{detail.attributes.image._url}}"> {{detail.attributes.name}}
+											</button>
+										</div>
+										<textarea ui-tinymce="tinyMCEOptions" ng-model="currentItem.attributes.description"></textarea>
+									</fieldset>
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-5 text-center">
+								<p>
+									<fieldset ng-disabled="isSaving">
+										<input type="submit" id="editSave" class="btn btn-primary btn-block" ng-click="saveItem()" value="Salvar" ng-class="{'disabled':isSaving || category.$invalid}"/>
+									</fieldset>
+								</p>
+							</div>
+							<div class="col-xs-5 text-center">
+								<p>
+									<fieldset ng-disabled="isSaving">
+										<input type="submit" id="editSave" ng-show="currentItem.id" class="btn btn-danger btn-block" ng-click="deleteItem()" value="Eliminar" ng-class="{'disabled':isSaving}"/>
+									</fieldset>
+								</p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid"></div>
+</div>

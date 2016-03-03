@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="La20AdminApp">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Presidente : Admin</title>
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+	<link href="bower_components/jquery-ui/themes/base/jquery-ui.min.css" rel="stylesheet" />
+	<link href="assets/css/custom.css" rel="stylesheet" />
+	<link href="css/animate.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div id="wrapper" ng-controller="La20AdminController">
+        <nav class="navbar navbar-default navbar-cls-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href ng-click="goTo('home',{});"><img src="assets/img/logo.png"  height="100%" class="center-block"/></a> 
+            </div>
+			<div style="color: white;padding: 15px 50px 5px 50px;float: right;font-size: 16px;"> &nbsp; <a href="/logout" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+				  <li>
+                        <a href ng-click="goTo('banners',{});" ng-class="{'active-menu':activeCategory=='banners'}"><i class="fa fa-table fa-3x"></i>Banners</a>
+                    </li>
+                    <li>
+                        <a href ng-click="goTo('categories',{});" ng-class="{'active-menu':activeCategory=='categories'}"><i class="fa fa-table fa-3x"></i>Categorías</a>
+                    </li>
+					<li>
+                        <a href ng-click="goTo('subcategories',{});" ng-class="{'active-menu':activeCategory=='subcategories'}"><i class="fa fa-table fa-3x"></i>Subcategorías</a>
+                    </li>
+                    <li>
+                        <a href ng-click="goTo('subcategories_order',{});" ng-class="{'active-menu':activeCategory=='subcategories_order'}"><i class="fa fa-table fa-3x"></i>Orden Subcategorias</a>
+                    </li>
+					<li>
+                        <a href ng-click="goTo('items',{});" ng-class="{'active-menu':activeCategory=='items'}"><i class="fa fa-table fa-3x"></i>Items</a>
+                    </li>
+					<li>
+                        <a href ng-click="goTo('details',{});" ng-class="{'active-menu':activeCategory=='details'}"><i class="fa fa-table fa-3x"></i>Tipos de Detalles</a>
+                    </li>
+                </ul>
+            </div>
+        </nav> 
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner" ui-view>
+                       
+			</div>
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+    </div>
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <script src="js/vendor/jquery-1.11.2.min.js"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="bower_components/angular/angular.min.js"></script>
+	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+	<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
+	<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+	<script src="js/vendor/parse-1.4.2.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
+    <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
+    <script src="js/angular-dropdown-multiselect.js"></script>
+    <script src="js/tinymce.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>

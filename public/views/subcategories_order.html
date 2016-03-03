@@ -1,0 +1,56 @@
+<div>
+	<div id="categories" class="row-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>Ordenar subcategorías</h1>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alerts"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+                <p>Click para editar orden</p>
+				<ul id="sortable" class="sortable">
+					<li class="ui-state-default"
+						ng-class="{selected:category==currentCategory}"
+						data-index="{{$index}}"
+						data-parse-id="{{category.id}}"
+						data-order="{{category.attributes.order}}"
+						ng-click="orderCategory($index)"
+						ng-repeat="category in categories">
+							{{category.attributes.name}}
+							<span class="ui-icon ui-icon-carat-1-e"></span>
+					</li>
+					<li class="ui-state-default"
+						ng-class="{selected:subcategory==currentCategory}"
+						data-index="{{$index}}"
+						data-parse-id="{{subcategory.id}}"
+						data-order="{{subcategory.attributes.order}}"
+						ng-click="orderSubcategory($index)"
+						ng-repeat="subcategory in subcategories|specialSubcategories">
+							{{subcategory.attributes.name}}
+							<span class="ui-icon ui-icon-carat-1-e"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-8" ng-show="currentCategory" id="editForm">
+				<p>Ordenar</p>
+				<div ng-show="(subcategories|forCategory:currentCategory).length==0">Esta categoría no tiene subcategorías asociadas</div>
+				<ul id="sortable_sub" class="sortable">
+					<li class="ui-state-default"
+						data-index="{{$index}}"
+						data-parse-id="{{subcategory.id}}"
+						data-order="{{subcategory.attributes.order}}"
+						ng-repeat="subcategory in subcategories|forCategory:currentCategory">
+							<span class="ui-icon ui-icon-arrowthick-2-n-s"></span>
+							{{subcategory.attributes.name}}<span></span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid"></div>
+</div>

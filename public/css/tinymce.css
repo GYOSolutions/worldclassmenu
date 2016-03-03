@@ -1,0 +1,34 @@
+@font-face {
+	font-family: 'BAUHS93';
+	src: url('../fonts/BAUHS93.eot');
+	src: local('BAUHS93'), url('../fonts/BAUHS93.woff') format('woff'), url('../fonts/BAUHS93.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'GillSansRegular';
+	src: url('../fonts/GillSans.eot');
+	src: local('GillSansRegular'), url('../fonts/GillSans.woff') format('woff'), url('../fonts/GillSans.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'GillSansBold';
+	src: url('../fonts/GillSans-Bold.eot');
+	src: local('GillSansBold'), url('../fonts/GillSans-Bold.woff') format('woff'), url('../fonts/GillSans-Bold.ttf') format('truetype');
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-size: 16px;
+    font-family: GillSansRegular;
+}
+
+p {
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+img.icono {
+	width: 22px;
+	margin-right: 10px;
+}

@@ -1,0 +1,86 @@
+<div>
+	<div id="categories" class="row-fluid">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>Detalles</h1>
+			</div>
+			<div class="col-xs-12">
+				<a href ng-click="addDetail()" class="btn btn-success">Agregar Nuevo</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="alerts"></div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-4">
+				<p>Click para editar</p>
+				<ul id="sortable" class="sortable">
+					<li class="ui-state-default"
+						ng-class="{selected:detail==currentDetail}"
+						data-index="{{$index}}"
+						data-parse-id="{{detail.id}}"
+						data-order="{{detail.attributes.order}}"
+						ng-click="editDetail($index);"
+						ng-repeat="detail in details">
+							<img class="icono" ng-src="{{detail.attributes.image._url}}" /> {{detail.attributes.name}}
+							<span class="ui-icon ui-icon-carat-1-e"></span>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-8" ng-show="currentDetail" id="editForm">
+				<p>Edite la información</p>
+				<div class="row-fluid">
+					<form novalidate="novalidate" name="category">
+						<div class="row">
+							<div class="col-xs-7">
+								<div class="form-group">
+									<fieldset ng-disabled="isSaving">
+										<label for="editName">Nombre</label>
+										<input type="text" class="form-control" placeholder="Nombre" ng-model="currentDetail.attributes.name" required>
+									</fieldset>
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="form-group">
+								<div class="col-xs-2">
+									<fieldset ng-disabled="isSaving">
+										<label for="editImage">Imagen</label>
+										<input type="file" id="editImage" ng-model="image" onchange="angular.element(this).scope().fileNameChanged()">
+									</fieldset>
+								</div>
+							</div>
+						</div>
+                        <div class="row">
+							<div class="form-group">
+								<div class="col-xs-10">
+									<br />
+									<img id="imageEdit" ng-show="currentDetail.attributes.image._url" ng-src="{{currentDetail.attributes.image._url}}" class="img-responsive block-center"/>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-5 text-center">
+								<p>
+									<fieldset ng-disabled="isSaving">
+										<input type="submit" id="editSave" class="btn btn-primary btn-block" ng-click="saveDetail()" value="Salvar" ng-class="{'disabled':isSaving || category.$invalid}"/>
+									</fieldset>
+								</p>
+							</div>
+							<div class="col-xs-5 text-center">
+								<p>
+									<fieldset ng-disabled="isSaving">
+										<input type="submit" id="editSave" ng-show="currentDetail.id" class="btn btn-danger btn-block" ng-click="deleteDetail()" value="Eliminar" ng-class="{'disabled':isSaving}"/>
+									</fieldset>
+								</p>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid"></div>
+</div>
