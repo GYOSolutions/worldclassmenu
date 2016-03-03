@@ -1,0 +1,11 @@
+{
+  "applications": {
+    "_default": {
+      "link": "worldclassmenu"
+    },
+    "worldclassmenu": {
+      "parseAppId": "mpdbe2XjrPafGDR823oLHMa3QGyoBAWABUOqn1NY",
+      "herokuAppId": "6834c681-01bd-4ca7-8696-81c213f56e55"
+    }
+  }
+}
